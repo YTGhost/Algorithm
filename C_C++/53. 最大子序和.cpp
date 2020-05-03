@@ -17,3 +17,17 @@ public:
         return max;
     }
 };
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum = 0, ans = nums[0];
+        for(int item : nums)
+        {
+            if(sum >= 0) sum += item;
+            else sum = item;
+            ans = max(ans, sum);
+        }
+        return ans;
+    }
+};
