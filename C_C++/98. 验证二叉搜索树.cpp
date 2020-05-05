@@ -28,3 +28,21 @@ public:
         return true;
     }
 };
+
+class Solution {
+public:
+    vector<int> a;
+    int sign;
+    bool isValidBST(TreeNode* root) {
+        travel(root);
+        return sign != 0 ? false : true;
+    }
+
+    void travel(TreeNode* root){
+        if(!root) return;
+        travel(root->left);
+        if(a.size() != 0 && root->val <= a[a.size() - 1]) sign = 1;
+        a.push_back(root->val);
+        travel(root->right);
+    }
+};
