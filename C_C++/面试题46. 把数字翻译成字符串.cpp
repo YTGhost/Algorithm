@@ -26,7 +26,6 @@ class Solution {
 public:
     int translateNum(int num) {
         string str = to_string(num);
-        int dp[str.length()];
         int a = 0, b = 0, c = 1;
         for(int i = 0; i < str.length(); i++)
         {
