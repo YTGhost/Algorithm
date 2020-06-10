@@ -1,3 +1,18 @@
+// 将数字转换成字符串，双指针
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x < 0) return false;
+        string str = to_string(x);
+        int l = 0, r = str.length() - 1;
+        for( ; l < r; l++, r--)
+        {
+            if(str[l] != str[r]) return false;
+        }
+        return true;
+    }
+};
+
 class Solution {
 public:
     bool isPalindrome(int x) {
