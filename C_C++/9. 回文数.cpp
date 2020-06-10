@@ -12,7 +12,7 @@ public:
         return true;
     }
 };
-
+// 不讲数字转换为字符串解法
 class Solution {
 public:
     bool isPalindrome(int x) {
