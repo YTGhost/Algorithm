@@ -1,3 +1,19 @@
+// AcWing打卡重做
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSum = INT_MIN;
+        int sum = nums[0];
+        for(int i = 1; i < nums.size(); i++)
+        {
+            maxSum = max(maxSum, sum);
+            if(sum < 0) sum = 0;
+            sum += nums[i];
+        }
+        return max(maxSum, sum);
+    }
+};
+
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
