@@ -1,3 +1,38 @@
+// 剑指打卡
+class CQueue {
+public:
+    stack<int> s1, s2;
+    CQueue() {
+        
+    }
+    
+    void appendTail(int value) {
+        s1.push(value);
+    }
+    
+    int deleteHead() {
+        int ans;
+        if(!s2.empty())
+        {
+            ans = s2.top();
+            s2.pop();
+        }else{
+            while(!s1.empty())
+            {
+                ans = s1.top();
+                s1.pop();
+                s2.push(ans);
+            }
+            if(s2.empty()) ans = -1;
+            else{
+                ans = s2.top();
+                s2.pop();
+            }
+        }
+        return ans;
+    }
+};
+
 class CQueue {
 public:
     stack<int> s1;
