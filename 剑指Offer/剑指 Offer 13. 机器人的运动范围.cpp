@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int st[105][105];
+    int dfs(int x, int y, int m, int n, int k){
+        if(x >= m || y >= n || x/10 + x%10 + y/10 + y%10 > k || st[x][y])
+            return 0;
+        st[x][y] = 1;
+        return 1 + dfs(x+1, y, m, n, k) + dfs(x, y+1, m, n, k);
+    }
+    
+    int movingCount(int m, int n, int k) {
+        return dfs(0, 0, m, n, k);
+    }
+};
