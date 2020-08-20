@@ -8,13 +8,13 @@ public:
         else dfs(board, x, y);
         return board;
     }
-    int dfs(vector<vector<char>>& board, int r, int c){
+    void dfs(vector<vector<char>>& board, int r, int c){
         int cnt = 0;
         for(int i = 0; i < 8; i++)
         {
             int x = r + dx[i];
             int y = c + dy[i];
-            if(x < 0 || x >= board.length() || y < 0 || y >= board[0].length()) continue;
+            if(x < 0 || x >= board.size() || y < 0 || y >= board[0].size()) continue;
             if(board[x][y] == 'M') cnt++;
         }
         if(cnt){
@@ -26,7 +26,7 @@ public:
         {
             int x = r + dx[i];
             int y = c + dy[i];
-            if(x < 0 || x >= board.length() || y < 0 || y >= board[0].length() || board[x][y] != 'E') continue;
+            if(x < 0 || x >= board.size() || y < 0 || y >= board[0].size() || board[x][y] != 'E') continue;
             dfs(board, x, y);
         }
     }
