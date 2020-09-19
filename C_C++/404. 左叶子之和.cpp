@@ -7,6 +7,19 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        if(!root) return 0;
+        int res = 0;
+        if(root->left && !root->left->left && !root->left->right) {
+            res += root->left->val;
+        }
+        return sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right) + res;
+    }
+};
+
 class Solution {
 public:
     int sum;
