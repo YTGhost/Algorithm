@@ -9,6 +9,19 @@
  */
 class Solution {
 public:
+    int num;
+    TreeNode* bstToGst(TreeNode* root) {
+        if(!root) return root;
+        bstToGst(root->right);
+        root->val += num;
+        num = root->val;
+        bstToGst(root->left);
+        return root;
+    }
+};
+
+class Solution {
+public:
     vector<int> a;
     int count = 0;
     void getVec(TreeNode* root){
