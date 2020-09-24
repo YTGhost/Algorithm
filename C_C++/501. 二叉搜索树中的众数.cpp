@@ -7,6 +7,42 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void dfs(TreeNode* root, TreeNode* &pre, int &max, int &cur, vector<int>& res) {
+        if(!root) return;
+        dfs(root->left, pre, max, cur, res);
+        if(pre) cur = (root->val == pre->val) ? cur + 1 : 1;
+        if(cur == max) {
+            res.emplace_back(root->val);
+        } else if (cur > max) {
+            res.clear();
+            res.emplace_back(root->val);
+            max = cur;
+        }
+        pre = root;
+        dfs(root->right, pre, max, cur, res);
+    }
+    vector<int> findMode(TreeNode* root) {
+        vector<int> res;
+        if(!root) return res;
+        TreeNode* pre = NULL;
+        int max = 0, cur = 1;
+        dfs(root, pre, max, cur, res);
+        return res;
+    }
+};
+
 class Solution {
 public:
     vector<int> order;
