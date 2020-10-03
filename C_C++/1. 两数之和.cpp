@@ -13,6 +13,21 @@ public:
     }
 };
 
+// 2020/10/03每日一题
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> map;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            auto temp = map.find(target-nums[i]);
+            if(temp != map.end()) return {i, map[target-nums[i]]};
+            map[nums[i]] = i;
+        }
+        return {};
+    }
+};
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
