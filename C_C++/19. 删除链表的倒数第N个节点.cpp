@@ -6,6 +6,25 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// 每日一题打卡
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummyNode = new ListNode(-1);
+        dummyNode->next = head;
+        ListNode* slow = dummyNode;
+        ListNode* fast = dummyNode->next;
+        while(n--) fast = fast->next;
+        while(fast)
+        {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        slow->next = slow->next->next;
+        return dummyNode->next;
+    }
+};
+
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
