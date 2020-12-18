@@ -18,3 +18,13 @@ public:
         return c;
     }
 };
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int total = 0;
+        for(auto c : s) total += c - 'a';
+        for(auto c : t) total -= c - 'a';
+        return 'a' + abs(total);
+    }
+};
