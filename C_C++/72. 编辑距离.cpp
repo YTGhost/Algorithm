@@ -1,6 +1,24 @@
 class Solution {
 public:
     int minDistance(string word1, string word2) {
+        int n = word1.size(), m = word2.size();
+        // f[i][j] word1前i个转换成word2前j个需要的最少操作数
+        vector<vector<int>> f(n+1, vector<int>(m+1));
+        for(int i = 1; i <= n; i++) f[i][0] = i;
+        for(int j = 1; j <= m; j++) f[0][j] = j;
+        for(int i = 1; i <= n; i++)
+            for(int j = 1; j <= m; j++)
+            {
+                if(word1[i-1] == word2[j-1]) f[i][j] = f[i-1][j-1];
+                else f[i][j] = min(min(f[i-1][j-1], f[i-1][j]), f[i][j-1]) + 1;
+            }
+        return f[n][m];
+    }
+};
+
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
         int n = word1.size();
         int m = word2.size();
         int dp[n+1][m+1];
