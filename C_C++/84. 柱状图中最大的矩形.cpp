@@ -2,6 +2,32 @@ class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
         int n = heights.size();
+        vector<int> l(n), r(n);
+        stack<int> stk;
+        for(int i = 0; i < n; i++)
+        {
+            while(!stk.empty() && heights[stk.top()] >= heights[i]) stk.pop();
+            l[i] = stk.empty() ? -1 : stk.top();
+            stk.push(i);
+        }
+        stk = stack<int>();
+        for(int i = n-1; i >= 0; i--)
+        {
+            while(!stk.empty() && heights[stk.top()] >= heights[i]) stk.pop();
+            r[i] = stk.empty() ? n : stk.top();
+            stk.push(i);
+        }
+        int res = 0;
+        for(int i = 0; i < n; i++)
+            res = max(res, (r[i] - l[i] - 1) * heights[i]);
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int n = heights.size();
         vector<int> left(n), right(n);
 
         stack<int> mono_stack;
