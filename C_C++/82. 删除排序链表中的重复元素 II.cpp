@@ -6,6 +6,24 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* dummyNode = new ListNode(0);
+        dummyNode->next = head;
+        ListNode* pre = dummyNode;
+        while(pre->next)
+        {
+            ListNode* t = pre->next;
+            while(t && pre->next->val == t->val) t = t->next;
+            if(pre->next->next == t) pre = pre->next;
+            else pre->next = t;
+        }
+        return dummyNode->next;
+    }
+};
+
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
