@@ -7,6 +7,21 @@
  * };
  */
 
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* pre = head;
+        while(pre && pre->next)
+        {
+            ListNode* cur = pre;
+            while(cur->next && cur->val == cur->next->val) cur = cur->next;
+            pre->next = cur->next;
+            pre = pre->next;
+        }
+        return head;
+    }
+};
+
 // 递归
 class Solution {
 public:
