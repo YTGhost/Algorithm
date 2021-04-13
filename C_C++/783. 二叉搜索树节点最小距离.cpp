@@ -7,6 +7,24 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+// 2021/04/13 每日一题
+class Solution {
+public:
+    int pre = -1;
+    int res = 100010;
+    void dfs(TreeNode* root) {
+        if(!root) return;
+        dfs(root->left);
+        if(pre == -1) pre = root->val;
+        else res = min(res, root->val - pre), pre = root->val;
+        dfs(root->right);
+    }
+    int minDiffInBST(TreeNode* root) {
+        dfs(root);
+        return res;
+    }
+};
 class Solution {
 public:
     int pre = -1;
