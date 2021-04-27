@@ -7,6 +7,23 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+// 2021/04/27 每日一题
+class Solution {
+public:
+    int res;
+    void inorder(TreeNode* root, int low, int high) {
+        if(!root) return;
+        inorder(root->left, low, high);
+        if(root->val >= low && root->val <= high)
+            res += root->val;
+        inorder(root->right, low, high);
+    }
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        inorder(root, low, high);
+        return res;
+    }
+};
+
 class Solution {
 public:
     int sum = 0;
