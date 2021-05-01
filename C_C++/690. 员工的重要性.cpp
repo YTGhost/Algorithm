@@ -11,6 +11,28 @@ public:
     vector<int> subordinates;
 };
 */
+
+// 2021/05/01 每日一题
+class Solution {
+public:
+    int res;
+    void dfs(vector<Employee*> &employees, int id) {
+        for(auto e : employees)
+        {
+            if(e->id == id) {
+                res += e->importance;
+                for(auto s : e->subordinates) {
+                    dfs(employees, s);
+                }
+            }
+        }
+    }
+    int getImportance(vector<Employee*> employees, int id) {
+        dfs(employees, id);
+        return res;
+    }
+};
+
 class Solution {
 public:
     int sum = 0;
