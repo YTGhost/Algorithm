@@ -1,3 +1,21 @@
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        int n = coins.size();
+        vector<vector<int>> f(n + 1, vector<int>(amount + 1));
+        f[0][0] = 1;
+        for(int i = 1; i <= n; i++) {
+            for(int j = 0; j <= amount; j++) {
+                int coin = coins[i-1];
+                for(int k = 0; k * coin <= j; k++) {
+                    f[i][j] += f[i-1][j - k*coin];
+                }
+            }
+        }
+        return f[n][amount];
+    }
+};
+
 // 二维朴素做法
 class Solution {
 public:
