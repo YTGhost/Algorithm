@@ -39,3 +39,20 @@ public:
         return slow;
     }
 };
+
+// 递归
+class Solution {
+public:
+    ListNode* res;
+    int cnt;
+    ListNode* getKthFromEnd(ListNode* head, int k) {
+        if(head == NULL) {
+            cnt = k - 1;
+            return NULL;
+        }
+        getKthFromEnd(head->next, k);
+        if(!cnt) res = head;
+        cnt--;
+        return res;
+    }
+};
