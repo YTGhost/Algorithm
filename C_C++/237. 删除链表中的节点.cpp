@@ -9,6 +9,13 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
+        *node = *node->next;
+    }
+};
+
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
         *node = *(node->next);
     }
 };
