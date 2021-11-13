@@ -1,6 +1,19 @@
 class Solution {
 public:
     bool detectCapitalUse(string word) {
+        int cnt = 0;
+        for(auto c : word) {
+            if(c >= 'A' && c <= 'Z') cnt++;
+        }
+        if(cnt == word.length() || cnt == 0) return true;
+        else if(cnt == 1 && word[0] >= 'A' && word[0] <= 'Z') return true;
+        else return false;
+    }
+};
+
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
         int sign;
         if(word.length() == 1) return true;
         if(word[0] >= 'A' && word[0] <= 'Z')
