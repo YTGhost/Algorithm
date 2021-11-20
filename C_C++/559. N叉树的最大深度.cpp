@@ -19,6 +19,25 @@ public:
 */
 class Solution {
 public:
+    int res = 0;
+    void dfs(Node* root, int depth) {
+        if(root->children.empty()) {
+            res = max(res, depth);
+            return;
+        }
+        for (auto child : root->children)  {
+            dfs(child, depth + 1);
+        }
+    }
+    int maxDepth(Node* root) {
+        if(!root) return 0;
+        dfs(root, 1);
+        return res;
+    }
+};
+
+class Solution {
+public:
     int maxDepth(Node* root) {
         if(!root){
             return 0;
