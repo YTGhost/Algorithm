@@ -9,6 +9,22 @@
  */
 class Solution {
 public:
+    TreeNode* res;
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if(!root) return NULL;
+        if(root->val > val) {
+            searchBST(root->left, val);
+        } else if(root->val < val) {
+            searchBST(root->right, val);
+        } else {
+            res = root;
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
     TreeNode* searchBST(TreeNode* root, int val) {
         while(root)
         {
