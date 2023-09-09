@@ -1,5 +1,37 @@
 class Solution {
 public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> deg(numCourses);
+        vector<vector<int>> edge(numCourses);
+        int visited = 0;
+        for(auto p : prerequisites) {
+            deg[p[0]]++;
+            edge[p[1]].push_back(p[0]);
+        }
+        queue<int> q;
+        for(int i = 0; i < numCourses; i++) {
+            if(deg[i] == 0) {
+                q.push(i);
+            }
+        }
+        while(!q.empty()) {
+            int t = q.front();
+            q.pop();
+            visited++;
+            for(int i = 0; i < edge[t].size(); i++) {
+                deg[edge[t][i]]--;
+                if(deg[edge[t][i]] == 0) {
+                    q.push(edge[t][i]);
+                }
+            }
+        }
+
+        return visited == numCourses;
+    }
+};
+
+class Solution {
+public:
     const static int N = 100010;
     int h[N], e[N], ne[N], idx;
     int q[N], d[N];
