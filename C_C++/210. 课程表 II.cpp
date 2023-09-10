@@ -1,6 +1,40 @@
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> deg(numCourses);
+        vector<vector<int>> edge(numCourses);
+        int visited = 0;
+        for(auto p : prerequisites) {
+            deg[p[0]]++;
+            edge[p[1]].push_back(p[0]);
+        }
+        queue<int> q;
+        for(int i = 0; i < numCourses; i++) {
+            if(deg[i] == 0) {
+                q.push(i);
+            }
+        }
+        vector<int> res;
+        while(!q.empty()) {
+            int t = q.front();
+            q.pop();
+            res.push_back(t);
+            visited++;
+            for(int i = 0; i < edge[t].size(); i++) {
+                deg[edge[t][i]]--;
+                if(deg[edge[t][i]] == 0) {
+                    q.push(edge[t][i]);
+                }
+            }
+        }
+
+        return visited == numCourses ? res : vector<int>{};
+    }
+};
+
+class Solution {
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> ans;
         int d[numCourses];
         int tt = -1, hh = 0;
