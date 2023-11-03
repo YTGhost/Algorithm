@@ -16,6 +16,29 @@ public:
 };
 */
 
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(!root) return root;
+        queue<Node*> q;
+        q.push(root);
+        while(q.size()) {
+            int cnt = q.size();
+            for(int i = 0; i < cnt; i++) {
+                auto a = q.front();
+                q.pop();
+                if(a->left) q.push(a->left);
+                if(a->right) q.push(a->right);
+                if(i != cnt - 1) {
+                    auto b = q.front();
+                    a->next = b;
+                }
+            }
+        }
+        return root;
+    }
+};
+
 // 空间O(1)
 class Solution {
 public:
