@@ -1,6 +1,28 @@
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
+        int n = digits.size();
+        int t = 1;
+        for(int i = n - 1; i >= 0; i--) {
+            digits[i] += t;
+            t = 0;
+            if(digits[i] >= 10) {
+                int a = digits[i] / 10;
+                t = a;
+                digits[i] %= 10;
+            }
+        }
+        cout << digits[0] << endl;
+        if(t != 0) {
+            digits.insert(digits.begin(), t);
+        }
+        return digits;
+    }
+};
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
         for(int i = digits.size()-1; i >= 0; i--)
         {
             if(++digits[i] == 10){
