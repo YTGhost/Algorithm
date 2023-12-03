@@ -9,6 +9,22 @@
  */
 class Solution {
 public:
+    int sum;
+    void dfs(TreeNode* root) {
+        if(!root) return;
+        dfs(root->right);
+        int t = sum;
+        sum += root->val;
+        root->val += t;
+        dfs(root->left);
+    }
+    TreeNode* bstToGst(TreeNode* root) {
+        dfs(root);
+        return root;
+    }
+};
+class Solution {
+public:
     int num;
     TreeNode* bstToGst(TreeNode* root) {
         if(!root) return root;
