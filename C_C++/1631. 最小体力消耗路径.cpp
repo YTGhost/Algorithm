@@ -1,5 +1,49 @@
 class Solution {
 public:
+    int p[10005];
+    int find(int x) {
+        if(p[x] != x) p[x] = find(p[x]);
+        return p[x];
+    }
+    void toUnion(int x, int y) {
+        p[find(x)] = find(y);
+    }
+    struct Edge {
+        int t, x, y;
+        bool operator < (const Edge& e) const {
+            return t < e.t;
+        }
+    };
+    int minimumEffortPath(vector<vector<int>>& heights) {
+        int row = heights.size(), col = heights[0].size();
+        for(int i = 0; i <= row * col; i++) {
+            p[i] = i;
+        }
+        vector<Edge> edges;
+        for(int i = 0; i < row; i++) {
+            for(int j = 0; j < col; j++) {
+                int id = i * col + j;
+                if(i > 0) {
+                    edges.push_back({abs(heights[i][j] - heights[i - 1][j]), id - col, id});
+                }
+                if(j > 0) {
+                    edges.push_back({abs(heights[i][j] - heights[i][j - 1]), id - 1, id});
+                }
+            }
+        }
+        sort(edges.begin(), edges.end());
+        for(auto& edge : edges) {
+            toUnion(edge.x, edge.y);
+            if(find(0) == find(row * col - 1)) {
+                return edge.t;
+            }
+        }
+        return 0;
+    }
+};
+
+class Solution {
+public:
     int p[10010];
     int find(int x) {
         if(p[x] != x) p[x] = find(p[x]);
