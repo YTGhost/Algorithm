@@ -11,6 +11,23 @@
  */
 class Solution {
 public:
+    void dfs(TreeNode* root1, TreeNode* root2, bool isOdd) {
+        if(!root1) return;
+        if(isOdd) {
+            swap(root1->val, root2->val);
+        }
+
+        dfs(root1->left, root2->right, !isOdd);
+        dfs(root1->right, root2->left, !isOdd);
+    }
+    TreeNode* reverseOddLevels(TreeNode* root) {
+        dfs(root->left, root->right, true);
+        return root;
+    }
+};
+
+class Solution {
+public:
     void dfs(TreeNode* left, TreeNode* right, bool flag) {
         if(!left) return;
         dfs(left->left, right->right, !flag);
