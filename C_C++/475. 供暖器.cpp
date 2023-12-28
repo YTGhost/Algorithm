@@ -1,5 +1,34 @@
 class Solution {
 public:
+    int lower_bound(vector<int>& heaters, int target) {
+        int l = 0, r = heaters.size();
+        while(l < r) {
+            int mid = l + (r - l) / 2;
+            if(heaters[mid] < target) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return l;
+    }
+    int findRadius(vector<int>& houses, vector<int>& heaters) {
+        sort(heaters.begin(), heaters.end());
+        int res = 0;
+        for(auto house : houses) {
+            int a = lower_bound(heaters, house);
+            int b = lower_bound(heaters, house) - 1;
+            int rightDistance = a >= heaters.size() ? INT_MAX : heaters[a] - house;
+            int leftDistance = b < 0 ? INT_MAX : house - heaters[b];
+            int t = min(rightDistance, leftDistance);
+            res = max(res, t);
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
     int findRadius(vector<int>& houses, vector<int>& heaters) {
         sort(houses.begin(), houses.end());
         sort(heaters.begin(), heaters.end());
