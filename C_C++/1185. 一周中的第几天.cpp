@@ -1,4 +1,14 @@
 class Solution {
+    const string weekdays[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+public:
+    string dayOfTheWeek(int day, int month, int year) {
+        tm dt = {0, 0, 0, day, month - 1, year - 1900};
+        time_t t = mktime(&dt);
+        return weekdays[localtime(&t)->tm_wday];
+    }
+};
+
+class Solution {
 public:
     string dayOfTheWeek(int day, int month, int year) {
         vector<string> ss = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
