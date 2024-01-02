@@ -1,6 +1,24 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> s;
+        int hash[1001];
+        memset(hash, 0, sizeof(hash));
+        for(auto num : nums1) {
+            hash[num]++;
+        }
+        for(auto num : nums2) {
+            if(hash[num]) {
+                s.insert(num);
+            }
+        }
+        return vector<int>(s.begin(), s.end());
+    }
+};
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         unordered_set<int> s1, s2;
         for(auto num : nums1) s1.insert(num);
         for(auto num : nums2) s2.insert(num);

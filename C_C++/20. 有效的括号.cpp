@@ -1,6 +1,27 @@
 class Solution {
 public:
     bool isValid(string s) {
+        stack<char> sk;
+        for(auto c : s) {
+            if(c == '(' || c == '{' || c == '[') {
+                sk.push(c);
+            } else if(!sk.empty()) {
+                if(c == ')' && sk.top() != '(' || c == '}' && sk.top() != '{' || c == ']' && sk.top() != '[') {
+                    return false;
+                } else {
+                    sk.pop();
+                }
+            } else {
+                return false;
+            }
+        }
+        return sk.empty();
+    }
+};
+
+class Solution {
+public:
+    bool isValid(string s) {
         stack<char> stack;
         for(int i = 0; i < s.length(); i++)
         {
