@@ -1,6 +1,22 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
+        int l = 0, n = nums.size();
+        for(int r = l + 1; r < n; r++) {
+            while(r < n && nums[r] == nums[l]) {
+                r++;
+            }
+            if(r < n) {
+                nums[++l] = nums[r];
+            }
+        }
+        return l + 1;
+    }
+};
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
         int n = nums.size();
         if(n == 0) return 0;
         int index = 1;
