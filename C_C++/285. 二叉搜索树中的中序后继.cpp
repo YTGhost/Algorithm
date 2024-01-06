@@ -9,6 +9,27 @@
  */
 class Solution {
 public:
+    TreeNode* res = NULL;
+    bool flag = false;
+    void dfs(TreeNode* root, TreeNode* p) {
+        if(!root) return;
+        inorderSuccessor(root->left, p);
+        if(flag) {
+            res = root;
+            flag = false;
+        }
+        if(root == p) {
+            flag = true;
+        }
+        inorderSuccessor(root->right, p);
+    }
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        dfs(root, p);
+        return res;
+    }
+};
+class Solution {
+public:
     TreeNode* res;
     bool flag = false;
     void dfs(TreeNode* root, TreeNode* p) {
