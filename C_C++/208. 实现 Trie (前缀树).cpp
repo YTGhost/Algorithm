@@ -1,4 +1,49 @@
 class Trie {
+public:
+    struct Node {
+        Node *son[26]{};
+        bool isEnd;
+    };
+    Node *root;
+    Trie() {
+        root = new Node();
+    }
+    
+    void insert(string word) {
+        auto cur = root;
+        for(auto c : word) {
+            if(cur->son[c - 'a'] == NULL) {
+                cur->son[c - 'a'] = new Node();
+            }
+            cur = cur->son[c - 'a'];
+        }
+        cur->isEnd = true;
+    }
+    
+    bool search(string word) {
+        auto cur = root;
+        for(auto c : word) {
+            if(cur->son[c - 'a'] == NULL) {
+                return false;
+            }
+            cur = cur->son[c - 'a'];
+        }
+        return cur->isEnd;
+    }
+    
+    bool startsWith(string prefix) {
+        auto cur = root;
+        for(auto c : prefix) {
+            if(cur->son[c - 'a'] == NULL) {
+                return false;
+            }
+            cur = cur->son[c - 'a'];
+        }
+        return true;
+    }
+};
+
+class Trie {
 private:
     vector<Trie*> children;
     bool isEnd;

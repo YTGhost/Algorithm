@@ -1,6 +1,27 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
+        if(ransomNote.size() > magazine.size()) {
+            return false;
+        }
+        int hash[26];
+        memset(hash, 0, sizeof(hash));
+        for(auto c : magazine) {
+            hash[c - 'a']++;
+        }
+        for(auto c : ransomNote) {
+            if(!hash[c - 'a']) {
+                return false;
+            }
+            hash[c - 'a']--;
+        }
+        return true;
+    }
+};
+
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
         unordered_map<char, int> m;
         for(auto c : magazine) {
             m[c]++;
