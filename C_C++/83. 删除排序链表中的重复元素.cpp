@@ -10,6 +10,22 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
+        auto dummyNode = new ListNode(-1, head);
+        auto p = head;
+        while(p && p->next) {
+            if(p->val == p->next->val) {
+                p->next = p->next->next;
+            } else {
+                p = p->next;
+            }
+        }
+        return dummyNode->next;
+    }
+};
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
         ListNode* pre = head;
         while(pre && pre->next)
         {
