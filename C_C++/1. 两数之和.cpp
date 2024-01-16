@@ -1,3 +1,21 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> m;
+        vector<int> res;
+        int n = nums.size();
+        for(int i = 0; i < n; i++) {
+            int t = target - nums[i];
+            if(m.count(t)) {
+                res = {m[t], i};
+                break;
+            }
+            m[nums[i]] = i;
+        }
+        return res;
+    }
+};
+
 // LeetCode究极班打卡
 class Solution {
 public:
