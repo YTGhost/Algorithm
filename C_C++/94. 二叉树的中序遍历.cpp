@@ -16,6 +16,20 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        function<void(TreeNode* root)> dfs = [&](TreeNode* root) {
+            if(!root) return;
+            dfs(root->left);
+            res.push_back(root->val);
+            dfs(root->right);
+        };
+        dfs(root);
+        return res;
+    }
+};
 // 迭代
 class Solution {
 public:

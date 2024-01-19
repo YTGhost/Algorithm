@@ -10,6 +10,20 @@
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
+        function<void(TreeNode* root)> dfs = [&](TreeNode* root) {
+            if(!root) return;
+            swap(root->left, root->right);
+            dfs(root->left);
+            dfs(root->right);
+        };
+        dfs(root);
+        return root;
+    }
+};
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
         if(!root || !root->left && !root->right) return root;
         invertTree(root->left);
         invertTree(root->right);

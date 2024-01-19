@@ -10,6 +10,22 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
+        int res = 0;
+        function<void(TreeNode* root, int depth)> dfs = [&](TreeNode* root, int depth) {
+            if(!root) return;
+            depth++;
+            res = max(res, depth);
+            dfs(root->left, depth);
+            dfs(root->right, depth);
+        };
+        dfs(root, 0);
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
         if(root == NULL){
             return 0;
         }
