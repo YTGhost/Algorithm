@@ -9,6 +9,17 @@
  */
 class Solution {
 public:
+    bool dfs(TreeNode* node1, TreeNode* node2) {
+        if(!node1 && !node2) return true;
+        if(!node1 || !node2) return false;
+        return node1->val == node2->val && dfs(node1->left, node2->right) && dfs(node1->right, node2->left);
+    }
+    bool isSymmetric(TreeNode* root) {
+        return dfs(root->left, root->right);
+    }
+};
+class Solution {
+public:
     bool isS(TreeNode* left, TreeNode* right){
         if(left == NULL && right == NULL){
             return true;
