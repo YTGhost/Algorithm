@@ -9,6 +9,17 @@
  */
 class Solution {
 public:
+    long lastVal = LONG_MIN;
+    bool isValidBST(TreeNode* root) {
+        if(!root) return true;
+        if(!isValidBST(root->left) || root->val <= lastVal) return false;
+        lastVal = root->val;
+        return isValidBST(root->right);
+    }
+};
+
+class Solution {
+public:
     vector<int> a;
     bool isValidBST(TreeNode* root) {
         if(!root){
