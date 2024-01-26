@@ -2,6 +2,41 @@ class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
         int n = grid.size(), m = grid[0].size();
+        int res = 0;
+        vector<vector<bool>> vis(n, vector<bool>(m, false));
+        int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+        function<void(int x, int y)> dfs = [&](int x, int y) {
+            if(x < 0 || x >= n || y < 0 || y >= m) {
+                return;
+            }
+            if(vis[x][y]) {
+                return;
+            }
+            if(grid[x][y] == '0') {
+                return;
+            }
+            vis[x][y] = true;
+            for(int i = 0; i < 4; i++) {
+                int nx = x + dx[i], ny = y + dy[i];
+                dfs(nx, ny);
+            }
+        };
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(grid[i][j] == '1' && !vis[i][j]) {
+                    dfs(i, j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int n = grid.size(), m = grid[0].size();
         vector<vector<bool>> vis(n, vector<bool>(m, false));
         queue<pair<int, int>> q;
         int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
