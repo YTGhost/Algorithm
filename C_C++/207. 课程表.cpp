@@ -1,6 +1,38 @@
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        int visit = 0;
+        vector<int> degs(numCourses);
+        vector<vector<int>> edges(numCourses);
+        for(auto prerequisite : prerequisites) {
+            degs[prerequisite[0]]++;
+            edges[prerequisite[1]].push_back(prerequisite[0]);
+        }
+        queue<int> q;
+        for(int i = 0; i < numCourses; i++) {
+            if(degs[i] == 0) {
+                q.push(i);
+            }
+        }
+        while(!q.empty()) {
+            auto course = q.front();
+            q.pop();
+            visit++;
+            for(int i = 0; i < edges[course].size(); i++) {
+                degs[edges[course][i]]--;
+                if(degs[edges[course][i]] == 0) {
+                    q.push(edges[course][i]);
+                }
+            }
+        }
+
+        return visit == numCourses;
+    }
+};
+
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> deg(numCourses);
         vector<vector<int>> edge(numCourses);
         int visited = 0;
