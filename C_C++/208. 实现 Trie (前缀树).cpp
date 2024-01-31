@@ -1,6 +1,52 @@
 class Trie {
 public:
     struct Node {
+        Node* son[26]{};
+        bool isEnd;
+        Node(bool isEnd) : son(), isEnd(isEnd) {}
+    };
+    Node *root;
+    Trie() {
+        root = new Node(false);
+    }
+    
+    void insert(string word) {
+        auto p = root;
+        for(auto c : word) {
+            if(!p->son[c - 'a']) {
+                p->son[c - 'a'] = new Node(false);
+            }
+            p = p->son[c - 'a'];
+        }
+        p->isEnd = true;
+    }
+    
+    bool search(string word) {
+        auto p = root;
+        for(auto c : word) {
+            if(!p->son[c - 'a']) {
+                return false;
+            }
+            p = p->son[c - 'a'];
+        }
+        return p->isEnd;
+    }
+    
+    bool startsWith(string prefix) {
+        auto p = root;
+        for(auto c : prefix) {
+            if(!p->son[c - 'a']) {
+                return false;
+            }
+            p = p->son[c - 'a'];
+        }
+        return true;
+    }
+};
+
+class Trie {
+public:
+    struct Node {
         Node *son[26]{};
         bool isEnd;
     };
