@@ -11,6 +11,44 @@
  */
 class Solution {
 public:
+    bool isCousins(TreeNode* root, int x, int y) {
+        vector<TreeNode*> q;
+        if(root->val == x || root->val == y) return false;
+        q.push_back(root);
+        while(!q.empty()) {
+            int xIdx = -1, yIdx = -1;
+            vector<TreeNode*> q2;
+            for(auto fa : q) {
+                if(fa->left) {
+                    q2.push_back(fa->left);
+                    if(fa->left->val == x) {
+                        xIdx = fa->val;
+                    }
+                    if(fa->left->val == y) {
+                        yIdx = fa->val;
+                    }
+                }
+                if(fa->right) {
+                    q2.push_back(fa->right);
+                    if(fa->right->val == x) {
+                        xIdx = fa->val;
+                    }
+                    if(fa->right->val == y) {
+                        yIdx = fa->val;
+                    }
+                }
+            }
+            if(xIdx != -1 && yIdx != -1 && xIdx != yIdx) {
+                return true;
+            }
+            q = move(q2);
+        }
+        return false;
+    }
+};
+
+class Solution {
+public:
     int deepX, deepY, fatherX, fatherY;
     void dfs(TreeNode* root, int x, int y, int deep) {
         if(!root) return;
