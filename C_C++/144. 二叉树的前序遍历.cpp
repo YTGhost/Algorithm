@@ -7,6 +7,20 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        function<void(TreeNode*)> dfs = [&](TreeNode* root) {
+            if(!root) return;
+            res.push_back(root->val);
+            dfs(root->left);
+            dfs(root->right);
+        };
+        dfs(root);
+        return res;
+    }
+};
 // 迭代
 class Solution {
 public:
