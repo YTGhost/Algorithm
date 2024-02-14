@@ -16,6 +16,28 @@ public:
         q.push(root);
         while(!q.empty()) {
             int cnt = q.size();
+            vector<int> vals;
+            for(int i = 0; i < cnt; i++) {
+                auto node = q.front();
+                q.pop();
+                vals.push_back(node->val);
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+            res.push_back(vals);
+        }
+        return res;
+    }
+};
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        if(!root) return res;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            int cnt = q.size();
             vector<int> t(cnt);
             for(int i = 0; i < cnt; i++) {
                 auto node = q.front();
