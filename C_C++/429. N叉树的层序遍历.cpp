@@ -19,6 +19,54 @@ public:
 */
 class Solution {
 public:
+    vector<vector<int>> levelOrder(Node* root) {
+        vector<vector<int>> res;
+        if(!root) return res;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()) {
+            int cnt = q.size();
+            vector<int> vals(cnt);
+            for(int i = 0; i < cnt; i++) {
+                auto node = q.front();
+                q.pop();
+                vals[i] = node->val;
+                for(auto child : node->children) {
+                    q.push(child);
+                }
+            }
+            res.push_back(vals);
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(Node* root) {
+        queue<Node*> q;
+        vector<vector<int>> res;
+        if(!root) return res;
+        q.push(root);
+        while(!q.empty()) {
+            int cnt = q.size();
+            vector<int> level(cnt);
+            for(int i = 0; i < cnt; i++) {
+                auto t = q.front();
+                q.pop();
+                level[i] = t->val;
+                for(int j = 0; j < t->children.size(); j++) {
+                    q.push(t->children[j]);
+                }
+            }
+            res.push_back(level);
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
     vector<vector<int>> a;
     queue<Node*> q;
     vector<vector<int>> levelOrder(Node* root) {
