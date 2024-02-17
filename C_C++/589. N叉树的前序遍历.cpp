@@ -19,6 +19,23 @@ public:
 */
 class Solution {
 public:
+    vector<int> preorder(Node* root) {
+        vector<int> res;
+        if(!root) return res;
+        function<void(Node* root)> dfs = [&](Node* root) {
+            if(!root) return;
+            res.push_back(root->val);
+            for(auto child : root->children) {
+                dfs(child);
+            }
+        };
+        dfs(root);
+        return res;
+    }
+};
+
+class Solution {
+public:
     vector<int> res;
     void dfs(Node* root) {
         if(!root) return;
