@@ -7,6 +7,23 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+class Solution {
+public:
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        int sum = 0;
+        function<void(TreeNode*)> dfs = [&](TreeNode* root) {
+            if(!root) return;
+            dfs(root->left);
+            if(root->val >= low && root->val <= high) {
+                sum += root->val;
+            }
+            dfs(root->right);
+        };
+        dfs(root);
+        return sum;
+    }
+};
+
 // 2021/04/27 每日一题
 class Solution {
 public:
