@@ -1,5 +1,46 @@
 class MyQueue {
 public:
+    stack<int> stk1;
+    stack<int> stk2;
+    MyQueue() {
+
+    }
+    
+    void push(int x) {
+        stk1.push(x);
+    }
+    
+    int pop() {
+        if(stk2.empty()) {
+            while(!stk1.empty()) {
+                int t = stk1.top();
+                stk1.pop();
+                stk2.push(t);
+            }
+        }
+        int num = stk2.top();
+        stk2.pop();
+        return num;
+    }
+    
+    int peek() {
+        if(stk2.empty()) {
+            while(!stk1.empty()) {
+                int t = stk1.top();
+                stk1.pop();
+                stk2.push(t);
+            }
+        }
+        return stk2.top();
+    }
+    
+    bool empty() {
+        return stk1.empty() && stk2.empty();
+    }
+};
+
+class MyQueue {
+public:
     /** Initialize your data structure here. */
     stack<int> s1;
     stack<int> s2;
