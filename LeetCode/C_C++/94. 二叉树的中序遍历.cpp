@@ -20,6 +20,25 @@ class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
+        stack<TreeNode*> stk;
+        while(root != NULL || !stk.empty()) {
+            while(root != NULL) {
+                stk.push(root);
+                root = root->left;
+            }
+            root = stk.top();
+            stk.pop();
+            res.push_back(root->val);
+            root = root->right;
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
         function<void(TreeNode*)> dfs = [&](TreeNode* root) {
             if(!root) return;
             dfs(root->left);
