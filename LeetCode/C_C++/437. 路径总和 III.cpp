@@ -11,6 +11,27 @@
  */
 class Solution {
 public:
+    int pathSum(TreeNode* root, int targetSum) {
+        if(!root) return 0;
+        function<int(TreeNode*, long)> dfs = [&](TreeNode* root, long target) -> int {
+            int res = 0;
+            if(!root) return res;
+            if(target == root->val) {
+                res++;
+            }
+            res += dfs(root->left, target - root->val);
+            res += dfs(root->right, target - root->val);
+            return res;
+        };
+        int res = dfs(root, targetSum);
+        res += pathSum(root->left, targetSum);
+        res += pathSum(root->right, targetSum);
+        return res;
+    }
+};
+
+class Solution {
+public:
     int res, target;
     void dfs1(TreeNode* root) {
         if(!root) return;

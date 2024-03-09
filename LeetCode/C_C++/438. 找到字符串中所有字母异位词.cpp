@@ -1,5 +1,31 @@
 class Solution {
 public:
+    vector<int> findAnagrams(string s, string p) {
+        int sLen = s.length(), pLen = p.length();
+        vector<int> res;
+        if(pLen > sLen) return res;
+        vector<int> sCnt(26);
+        vector<int> pCnt(26);
+        for(int i = 0; i < pLen; i++) {
+            sCnt[s[i] - 'a']++;
+            pCnt[p[i] - 'a']++;
+        }
+        if(sCnt == pCnt) {
+            res.push_back(0);
+        }
+        for(int i = 0; i < sLen - pLen; i++) {
+            sCnt[s[i] - 'a']--;
+            sCnt[s[i + pLen] - 'a']++;
+            if(sCnt == pCnt) {
+                res.push_back(i + 1);
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
     bool check(vector<int> &c1, vector<int> &c2) {
         for(int i = 0; i < 26; i++) {
             if(c1[i] != c2[i]) return false;

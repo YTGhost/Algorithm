@@ -11,6 +11,23 @@ class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         if(preorder.empty()) return NULL;
+        int val = preorder[0];
+        auto len = ranges::find(inorder, val) - inorder.begin();
+        auto pre1 = vector<int>(preorder.begin() + 1, preorder.begin() + 1 + len);
+        auto pre2 = vector<int>(preorder.begin() + 1 + len, preorder.end());
+        auto ino1 = vector<int>(inorder.begin(), inorder.begin() + len);
+        auto ino2 = vector<int>(inorder.begin() + len + 1, inorder.end());
+        auto root = new TreeNode(val);
+        root->left = buildTree(pre1, ino1);
+        root->right = buildTree(pre2, ino2);
+        return root;
+    }
+};
+
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if(preorder.empty()) return NULL;
         int leftSize = ranges::find(inorder, preorder[0]) - inorder.begin();
         vector<int> pre1(preorder.begin() + 1, preorder.begin() + 1 + leftSize);
         vector<int> pre2(preorder.begin() + 1 + leftSize, preorder.end());
