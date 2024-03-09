@@ -11,6 +11,22 @@ class Solution {
 public:
     int maxPathSum(TreeNode* root) {
         int res = INT_MIN;
+        function<int(TreeNode*)> dfs = [&](TreeNode* root) -> int {
+            if(!root) return 0;
+            int left = dfs(root->left);
+            int right = dfs(root->right);
+            res = max(res, left + right + root->val);
+            return max(max(left, right) + root->val, 0);
+        };
+        dfs(root);
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int maxPathSum(TreeNode* root) {
+        int res = INT_MIN;
         function<int(TreeNode*)> dfs = [&](TreeNode* root) {
             if(!root) return 0;
             int left = dfs(root->left);
