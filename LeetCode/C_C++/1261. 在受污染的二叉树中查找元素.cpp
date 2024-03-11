@@ -12,6 +12,38 @@
 class FindElements {
 public:
     unordered_set<int> s;
+    FindElements(TreeNode* root) {
+        root->val = 0;
+        s.insert(0);
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            int cnt = q.size();
+            for(int i = 0; i < cnt; i++) {
+                auto node = q.front();
+                q.pop();
+                if(node->left) {
+                    node->left->val = 2 * node->val + 1;
+                    s.insert(node->left->val);
+                    q.push(node->left);
+                }
+                if(node->right) {
+                    node->right->val = 2 * node->val + 2;
+                    s.insert(node->right->val);
+                    q.push(node->right);
+                }
+            }
+        }
+    }
+    
+    bool find(int target) {
+        return s.contains(target);
+    }
+};
+
+class FindElements {
+public:
+    unordered_set<int> s;
     void dfs(TreeNode* root, int val) {
         if(!root) return;
         root->val = val;
