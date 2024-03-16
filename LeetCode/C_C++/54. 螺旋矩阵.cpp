@@ -1,6 +1,28 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> res(m * n);
+        vector<vector<bool>> visit(m, vector<bool>(n, false));
+        int direction = 0, dx[4] = {0, 1, 0, -1}, dy[4] = {1, 0, -1, 0};
+        int x = 0, y = 0, idx = 0;
+        while(idx < m * n) {
+            res[idx] = matrix[x][y];
+            visit[x][y] = true;
+            int nx = x + dx[direction], ny = y + dy[direction];
+            if(nx < 0 || nx >= m || ny < 0 || ny >= n || visit[nx][ny]) {
+                direction = (direction + 1) % 4;
+            }
+            x = x + dx[direction], y = y + dy[direction];
+            idx++;
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
         int x = 0, y = 0, m = matrix.size(), n = matrix[0].size();
         int cnt = m * n;
         vector<int> res;
