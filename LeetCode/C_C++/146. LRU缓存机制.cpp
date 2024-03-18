@@ -1,3 +1,68 @@
+class Node {
+public:
+    int key, value;
+    Node *prev, *next;
+
+    Node(int k = 0, int v = 0) : key(k), value(v) {}
+};
+
+class LRUCache {
+private:
+    int capacity;
+    Node *dummy;
+    unordered_map<int, Node*> key2node;
+
+    void remove(Node *x) {
+        x->prev->next = x->next;
+        x->next->prev = x->prev;
+    }
+
+    void push_front(Node *x) {
+        x->next = dummy->next;
+        dummy->next->prev = x;
+        dummy->next = x;
+        x->prev = dummy;
+    }
+
+    Node* get_node(int key) {
+        auto it = key2node.find(key);
+        if(it == key2node.end()) {
+            return NULL;
+        }
+        auto node = it->second;
+        remove(node);
+        push_front(node);
+        return node;
+    }
+public:
+    LRUCache(int capacity) : capacity(capacity), dummy(new Node()) {
+        dummy->next = dummy;
+        dummy->prev = dummy;
+    }
+    
+    int get(int key) {
+        auto node = get_node(key);
+        return node ? node->value : -1;
+    }
+    
+    void put(int key, int value) {
+        auto node = get_node(key);
+        if(node) {
+            node->value = value;
+            return;
+        }
+        node = new Node(key, value);
+        key2node[key] = node;
+        push_front(node);
+        if(key2node.size() > capacity) {
+            auto last_node = dummy->prev;
+            key2node.erase(last_node->key);
+            remove(last_node);
+            delete last_node;
+        }
+    }
+};
+
 struct DLinkedNode {
         int key, value;
         DLinkedNode* prev;
