@@ -1,6 +1,29 @@
 class Solution {
 public:
     bool isValid(string s) {
+        stack<char> stk;
+        int n = s.length();
+        for(int i = 0; i < n; i++) {
+            if(!stk.empty() && (s[i] == ')' || s[i] == ']' || s[i] == '}')) {
+                if (s[i] == ')' && stk.top() != '(') {
+                    return false;
+                } else if(s[i] == ']' && stk.top() != '[') {
+                    return false;
+                } else if(s[i] == '}' && stk.top() != '{') {
+                    return false;
+                } 
+                stk.pop();
+            } else {
+                stk.push(s[i]);
+            }
+        }
+        return stk.empty();
+    }
+};
+
+class Solution {
+public:
+    bool isValid(string s) {
         stack<char> sk;
         for(auto c : s) {
             if(c == '(' || c == '{' || c == '[') {
