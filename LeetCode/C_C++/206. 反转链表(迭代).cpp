@@ -9,6 +9,21 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* cur = head;
+        while(cur) {
+            auto next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+};
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
         if(head == NULL || head->next == NULL)    return head;
         ListNode* L1 = head->next;
         ListNode* L2 = head;

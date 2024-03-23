@@ -16,6 +16,21 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(headA == nullptr || headB == nullptr) {
+            return nullptr;
+        }
+        auto p1 = headA, p2 = headB;
+        while(p1 != p2) {
+            p1 = p1 == nullptr ? headB : p1->next;
+            p2 = p2 == nullptr ? headA : p2->next;
+        }
+        return p1;
+    }
+};
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         if(!headA || !headB) return NULL;
         ListNode* pa = headA, *pb = headB;
         while(pa != pb) {

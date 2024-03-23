@@ -6,6 +6,43 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if(!list1) {
+            return list2;
+        } else if(!list2) {
+            return list1;
+        } else if(list1->val < list2->val) {
+            list1->next = mergeTwoLists(list1->next, list2);
+            return list1;
+        }
+        list2->next = mergeTwoLists(list1, list2->next);
+        return list2;
+    }
+};
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        auto dummyNode = new ListNode(-1);
+        auto ptr = dummyNode;
+        while(list1 && list2) {
+            if(list1->val <= list2->val) {
+                ptr->next = list1;
+                list1 = list1->next;
+            } else {
+                ptr->next = list2;
+                list2 = list2->next;
+            }
+            ptr = ptr->next;
+        }
+        ptr->next = list1 ? list1 : list2;
+        return dummyNode->next;
+    }
+};
+
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
