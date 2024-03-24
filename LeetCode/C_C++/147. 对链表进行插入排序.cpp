@@ -9,6 +9,32 @@
 class Solution {
 public:
     ListNode* insertionSortList(ListNode* head) {
+        if(!head) return NULL;
+        auto dummyNode = new ListNode(-1);
+        dummyNode->next = head;
+        ListNode *lastSorted = head;
+        ListNode *cur = head->next;
+        while(cur) {
+            if (cur->val >= lastSorted->val) {
+                lastSorted = lastSorted->next;
+            } else {
+                auto prev = dummyNode;
+                while(prev->next->val <= cur->val) {
+                    prev = prev->next;
+                }
+                lastSorted->next = cur->next;
+                cur->next = prev->next;
+                prev->next = cur;
+            }
+            cur = lastSorted->next;
+        }
+        return dummyNode->next;
+    }
+};
+
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
         if(!head) return head;
         ListNode* dummyNode = new ListNode(-1);
         dummyNode->next = head;

@@ -6,6 +6,24 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        auto dummyNode = new ListNode(-1);
+        dummyNode->next = head;
+        auto ptr = dummyNode;
+        while(ptr->next && ptr->next->next) {
+            auto node1 = ptr->next;
+            auto node2 = ptr->next->next;
+            auto next = node2->next;
+            ptr->next = node2;
+            node2->next = node1;
+            node1->next = next;
+            ptr = ptr->next->next;
+        }
+        return dummyNode->next;
+    }
+};
 // 递归
 class Solution {
 public:
