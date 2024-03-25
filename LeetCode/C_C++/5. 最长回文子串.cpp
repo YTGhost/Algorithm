@@ -1,3 +1,33 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.length();
+        vector<vector<bool>> f(n, vector<bool>(n, false));
+        for(int i = 0; i < n; i++) {
+            f[i][i] = true;
+        }
+        int res = 0, l = 0, r = 0;
+        for(int len = 2; len <= n; len++) {
+            for(int i = 0; i + len <= n; i++) {
+                int j = i + len - 1;
+                f[i][j] = s[i] == s[j];
+                if(j > i + 2) {
+                    f[i][j] = f[i][j] && f[i + 1][j - 1];
+                }
+                if(f[i][j]) {
+                    int len = j - i + 1;
+                    if(len > res) {
+                        cout << len << endl;
+                        res = len;
+                        l = i, r = j;
+                    }
+                }
+            }
+        }
+        return s.substr(l, r - l + 1);
+    }
+};
+
 // LeetCode究极班打卡
 class Solution {
 public:

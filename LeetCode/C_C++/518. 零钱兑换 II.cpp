@@ -1,6 +1,20 @@
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
+        vector<int> f(amount + 1);
+        f[0] = 1;
+        for(auto coin : coins) {
+            for(int i = coin; i <= amount; i++) {
+                f[i] += f[i - coin];
+            }
+        }
+        return f[amount];
+    }
+};
+
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
         int n = coins.size();
         vector<vector<int>> f(n + 1, vector<int>(amount + 1));
         f[0][0] = 1;
