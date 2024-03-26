@@ -1,6 +1,26 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> res;
+        sort(intervals.begin(), intervals.end());
+        int n = intervals.size();
+        int l = intervals[0][0], r = intervals[0][1];
+        for(int i = 1; i < n; i++) {
+            if (intervals[i][0] <= r) {
+                r = max(r, intervals[i][1]);
+            } else {
+                res.push_back(vector<int>{l, r});
+                l = intervals[i][0], r = intervals[i][1];
+            }
+        }
+        res.push_back(vector<int>{l, r});
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end());
         vector<vector<int>> res;
         for(int i = 0; i < intervals.size(); i++) {
