@@ -3,7 +3,6 @@
 #include <vector>
 #include <functional>
 #include <algorithm>
-#include <ranges>
 using namespace std;
 
 int main()
@@ -23,7 +22,7 @@ int main()
             if(days[i] == 0) continue;
             lastOccur[days[i] - 1] = i;
         }
-        if(ranges::find(lastOccur, -1) != lastOccur.end()) {
+        if(find(lastOccur.begin(), lastOccur.end(), -1) != lastOccur.end()) {
             return false;
         }
         int cnt = 0;
