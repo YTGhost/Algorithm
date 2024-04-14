@@ -1,5 +1,25 @@
 class MyHashSet {
 public:
+    int hash[1000010];
+    MyHashSet() {
+        memset(hash, 0, sizeof(hash));
+    }
+    
+    void add(int key) {
+        hash[key] = 1;
+    }
+    
+    void remove(int key) {
+        hash[key] = 0;
+    }
+    
+    bool contains(int key) {
+        return hash[key];
+    }
+};
+
+class MyHashSet {
+public:
     /** Initialize your data structure here. */
     int hash[1000001];
     MyHashSet() {
