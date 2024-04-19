@@ -1,6 +1,36 @@
 class Solution {
 public:
     int findTheLongestSubstring(string s) {
+        int n = s.length();
+        vector<int> prefixSum(n + 1);
+        unordered_map<char, int> hash{
+            {'a', 0},
+            {'e', 1},
+            {'i', 2},
+            {'o', 3},
+            {'u', 4}
+        };
+        unordered_map<int, int> mp;
+        mp[0] = 0;
+        int res = 0;
+        for(int i = 0; i < n; i++) {
+            prefixSum[i + 1] = prefixSum[i];
+            if(hash.count(s[i])) {
+                prefixSum[i + 1] ^= (1 << hash[s[i]]);
+            }
+            if(mp.find(prefixSum[i + 1]) == mp.end()) {
+                mp[prefixSum[i + 1]] = i + 1;
+            } else {
+                res = max(res, i + 1 - mp[prefixSum[i + 1]]);
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int findTheLongestSubstring(string s) {
         vector<int> pre(1 << 5, INT_MAX);
         int state = 0, ans = 0;
         pre[0] = -1;
