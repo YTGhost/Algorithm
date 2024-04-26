@@ -3,6 +3,30 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         int n = candidates.size();
         vector<vector<int>> res;
+        vector<int> path;
+        function<void(int, int)> dfs = [&](int idx, int target) {
+            if(target == 0) {
+                res.push_back(path);
+            }
+            if(target < 0) {
+                return;
+            }
+            for(int i = idx; i < n; i++) {
+                path.push_back(candidates[i]);
+                dfs(i, target - candidates[i]);
+                path.pop_back();
+            }
+        };
+        dfs(0, target);
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int n = candidates.size();
+        vector<vector<int>> res;
         vector<int> combination;
         vector<bool> visit(n, false);
         function<void(int, int)> dfs = [&](int idx, int sum) {
