@@ -12,6 +12,25 @@ public:
 };
 */
 
+class Solution {
+public:
+    int getImportance(vector<Employee*> employees, int id) {
+        unordered_map<int, Employee*> mp;
+        for (auto &employee : employees) {
+            mp[employee->id] = employee;
+        }
+        function<int(int)> dfs = [&](int id) {
+            auto employee = mp[id];
+            int sum = employee->importance;
+            for (auto &eid : employee->subordinates) {
+                sum += dfs(mp[eid]->id);
+            }
+            return sum;
+        };
+        return dfs(id);
+    }
+};
+
 // 2021/05/01 每日一题
 class Solution {
 public:
