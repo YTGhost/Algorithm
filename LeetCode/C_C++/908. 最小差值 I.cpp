@@ -1,6 +1,19 @@
 class Solution {
 public:
     int smallestRangeI(vector<int>& nums, int k) {
+        int n = nums.size();
+        int maxVal = 0, minVal = INT_MAX;
+        for (auto num : nums) {
+            maxVal = max(maxVal, num);
+            minVal = min(minVal, num);
+        }
+        return max(maxVal - minVal - 2 * k, 0);
+    }
+};
+
+class Solution {
+public:
+    int smallestRangeI(vector<int>& nums, int k) {
         int maxVal = nums[0], minVal = nums[0];
         for(auto num : nums) {
             maxVal = max(maxVal, num);
