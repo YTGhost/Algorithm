@@ -1,5 +1,28 @@
 class Solution {
 public:
+    int numFriendRequests(vector<int>& ages) {
+        int n = ages.size(), res = 0;
+        vector<int> cnt(121);
+        for (auto age : ages) {
+            cnt[age]++;
+        }
+        int window = 0, y = 1;
+        for (int x = 1; x <= 120; x++) {
+            window += cnt[x];
+            if (2 * y <= x + 14) {
+                window -= cnt[y];
+                y++;
+            }
+            if (window > 0) {
+                res += cnt[x] * window - cnt[x];
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
     bool check(int x, int y) {
         if(y <= 0.5 * x + 7) return false;
         if(y > x) return false;
