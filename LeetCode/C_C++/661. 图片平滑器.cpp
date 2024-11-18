@@ -2,6 +2,34 @@ class Solution {
 public:
     vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
         int m = img.size(), n = img[0].size();
+        int dx[8] = {-1, -1, 0, 1, 1, 1, 0, -1}, dy[8] = {0, 1, 1, 1, 0, -1, -1, -1};
+        vector<vector<int>> res(m, vector<int>(n));
+        function<int(int, int)> cal = [&](int x, int y) {
+            int sum = img[x][y];
+            int cnt = 1;
+            for (int i = 0; i < 8; i++) {
+                int nx = x + dx[i], ny = y + dy[i];
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                    continue;
+                }
+                cnt++;
+                sum += img[nx][ny];
+            }
+            return sum / cnt;
+        };
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res[i][j] = cal(i, j);
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int m = img.size(), n = img[0].size();
         vector<vector<int>> res(m, vector<int>(n));
         int dx[8] = {-1, -1, 0, 1, 1, 1, 0, -1}, dy[8] = {0, 1, 1, 1, 0, -1, -1, -1};
         function<int(int, int)> handle = [&](int x, int y) {
