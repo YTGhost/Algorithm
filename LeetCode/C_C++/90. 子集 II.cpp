@@ -1,5 +1,31 @@
 class Solution {
 public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> res;
+        vector<int> path;
+        sort(nums.begin(), nums.end());
+        function<void(int)> dfs = [&](int idx) {
+            if (idx == n) {
+                res.push_back(path);
+                return;
+            }
+            path.push_back(nums[idx]);
+            dfs(idx + 1);
+            path.pop_back();
+            idx++;
+            while (idx < n && nums[idx] == nums[idx - 1]) {
+                idx++;
+            }
+            dfs(idx);
+        };
+        dfs(0);
+        return res;
+    }
+};
+
+class Solution {
+public:
     vector<vector<int>> res;
     vector<int> temp;
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
